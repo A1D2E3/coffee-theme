@@ -35,6 +35,9 @@
         "button"
       ],
       "settings": {
+        "bg_type": "image",
+        "desktop_video": "shopify:\/\/files\/videos\/Desktop video.mp4",
+        "mobile_video": "shopify:\/\/files\/videos\/Mobile video.mp4",
         "image": "shopify:\/\/shop_images\/banner_image_main.jpg",
         "image_overlay_opacity": 20,
         "image_height": "large",
