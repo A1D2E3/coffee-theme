@@ -7,6 +7,21 @@ class CartDrawer extends HTMLElement {
     this.setHeaderCartIconAccessibility();
   }
 
+  upSell(){
+    const upsell_inner = this.querySelector('.upsell_inner');
+    if(upsell_inner) this.handle = upsell_inner.dataset.handle;
+    this.items = Array.from(this.querySelectorAll('cart-drawer-items .cart-item'));
+    this.item = this.items.find(item => item.dataset.productHandle == this.handle);
+    const cart_empty = this.querySelector('cart-drawer-items').classList.contains('is-empty');
+    if(this.item || cart_empty) {
+      this.querySelector('.upsell').style.display = 'none';
+    }else{
+      this.querySelector('.upsell').style.display = 'block';
+    }
+
+  }
+
+
   setHeaderCartIconAccessibility() {
     const cartLink = document.querySelector('#cart-icon-bubble');
     cartLink.setAttribute('role', 'button');
@@ -37,6 +52,7 @@ class CartDrawer extends HTMLElement {
     }, { once: true });
 
     document.body.classList.add('overflow-hidden');
+    this.upSell();
   }
 
   close() {
