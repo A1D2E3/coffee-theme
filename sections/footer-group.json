@@ -32,6 +32,9 @@
         "footer-1",
         "footer-2"
       ],
+      "custom_css": [
+
+      ],
       "settings": {
         "color_scheme": "background-1",
         "newsletter_enable": true,
