@@ -32,6 +32,9 @@
         "footer-1",
         "footer-2"
       ],
+      "custom_css": [
+        ".footer__list-social {display: flex; flex-wrap: wrap; justify-content: center;}"
+      ],
       "settings": {
         "color_scheme": "background-1",
         "newsletter_enable": true,
