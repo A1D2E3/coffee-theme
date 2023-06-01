@@ -25,3 +25,8 @@
 .list-social__link:hover .icon {
   transform: scale(1.07);
 }
+.footer__list-social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
