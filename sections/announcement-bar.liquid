@@ -1,105 +1,208 @@
 {%- for block in section.blocks -%}
-  {%- case block.type -%}
-    {%- when 'announcement' -%}
-      <div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region" aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
-        {%- if block.settings.text != blank -%}
-          {%- if block.settings.link != blank -%}
-            <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
-          {%- endif -%}
-              <div class="page-width">
-                <p class="announcement-bar__message {{ block.settings.text_alignment }} h5">
-                  <span>{{ block.settings.text | escape }}</span>
-                  {%- if block.settings.link != blank -%}
-                    {% render 'icon-arrow' %}
-                  {%- endif -%}
-                </p>
-              </div>
-          {%- if block.settings.link != blank -%}
-            </a>
-          {%- endif -%}
+{%- case block.type -%}
+{%- when 'announcement' -%}
+<div class="announcement-bar color-{{ block.settings.color_scheme }} gradient" role="region"
+  aria-label="{{ 'sections.header.announcement' | t }}" {{ block.shopify_attributes }}>
+  {%- if block.settings.text != blank -%}
+  {%- if block.settings.link != blank -%}
+  <a href="{{ block.settings.link }}" class="announcement-bar__link link link--text focus-inset animate-arrow">
+    {%- endif -%}
+    <div class="page-width">
+      <p class="announcement-bar__message {{ block.settings.text_alignment }} h5">
+        <span>{{ block.settings.text | escape }}</span>
+        {%- if block.settings.link != blank -%}
+        {% render 'icon-arrow' %}
         {%- endif -%}
-      </div>
-  {%- endcase -%}
+      </p>
+    </div>
+    {%- if block.settings.link != blank -%}
+  </a>
+  {%- endif -%}
+  {%- endif -%}
+</div>
+{%- when 'date' -%}
+<div class="count_down announcement-bar color-{{ block.settings.color_scheme }} gradient"
+  data-date="{{ block.settings.date_deadline }}" data-expired="{{ block.settings.expired_message }}">
+  <p class="announcement-bar__message {{ block.settings.text_alignment }} h5">{{ block.settings.custom_text }}<span
+      class="count_down_timer p-x-1"></span></p>
+</div>
+{%- endcase -%}
 {%- endfor -%}
+<script>
+  document.querySelectorAll('.count_down').forEach((counter) => {
+    const deadline = counter.dataset.date;
+    const expired = counter.dataset.expired;
+    console.log(deadline, expired);
+    var countDownDate = new Date(deadline).getTime();
+    console.log(countDownDate);
+    let counterLoop = setInterval(function () {
+      var now = new Date().getTime();
+      var calc = countDownDate - now;
+      var days = Math.floor(calc / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((calc % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((calc % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((calc % (1000 * 60)) / 1000);
+      counter.querySelector(".count_down_timer").innerHTML = days + "d " + hours + "h "
+        + minutes + "m " + seconds + "s ";
 
+      if (calc <= 0) {
+        clearInterval(counterLoop);
+        counter.querySelector(".count_down_timer").innerHTML = expired;
+      }
+    }, 1000);
+  })
+</script>
 {% schema %}
 {
-  "name": "t:sections.announcement-bar.name",
-  "max_blocks": 12,
-  "class": "announcement-bar-section",
-  "blocks": [
-    {
-      "type": "announcement",
-      "name": "t:sections.announcement-bar.blocks.announcement.name",
-      "settings": [
-        {
-          "type": "text",
-          "id": "text",
-          "default": "Welcome to our store",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
-        },
-        {
-          "type": "select",
-          "id": "text_alignment",
-          "options": [
-            {
-              "value": "left",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__1.label"
-            },
-            {
-              "value": "center",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__2.label"
-            },
-            {
-              "value": "right",
-              "label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__3.label"
-            }
-          ],
-          "default": "center",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.label"
-        },
-        {
-          "type": "select",
-          "id": "color_scheme",
-          "options": [
-            {
-              "value": "accent-1",
-              "label": "t:sections.all.colors.accent_1.label"
-            },
-            {
-              "value": "accent-2",
-              "label": "t:sections.all.colors.accent_2.label"
-            },
-            {
-              "value": "background-1",
-              "label": "t:sections.all.colors.background_1.label"
-            },
-            {
-              "value": "background-2",
-              "label": "t:sections.all.colors.background_2.label"
-            },
-            {
-              "value": "inverse",
-              "label": "t:sections.all.colors.inverse.label"
-            }
-          ],
-          "default": "accent-1",
-          "label": "t:sections.all.colors.label"
-        },
-        {
-          "type": "url",
-          "id": "link",
-          "label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
-        }
-      ]
-    }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "announcement"
-      }
-    ]
-  }
+"name": "t:sections.announcement-bar.name",
+"max_blocks": 12,
+"class": "announcement-bar-section",
+"blocks": [
+{
+"type": "announcement",
+"name": "t:sections.announcement-bar.blocks.announcement.name",
+"settings": [
+{
+"type": "text",
+"id": "text",
+"default": "Welcome to our store",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text.label"
+},
+{
+"type": "select",
+"id": "text_alignment",
+"options": [
+{
+"value": "left",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__1.label"
+},
+{
+"value": "center",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__2.label"
+},
+{
+"value": "right",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__3.label"
+}
+],
+"default": "center",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.label"
+},
+{
+"type": "select",
+"id": "color_scheme",
+"options": [
+{
+"value": "accent-1",
+"label": "t:sections.all.colors.accent_1.label"
+},
+{
+"value": "accent-2",
+"label": "t:sections.all.colors.accent_2.label"
+},
+{
+"value": "background-1",
+"label": "t:sections.all.colors.background_1.label"
+},
+{
+"value": "background-2",
+"label": "t:sections.all.colors.background_2.label"
+},
+{
+"value": "inverse",
+"label": "t:sections.all.colors.inverse.label"
+}
+],
+"default": "accent-1",
+"label": "t:sections.all.colors.label"
+},
+{
+"type": "url",
+"id": "link",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.link.label"
+}
+]
+},
+{
+"name": "Date Block",
+"type": "date",
+"settings": [
+{
+"type": "text",
+"id": "date_deadline",
+"label": "date",
+"default": "Jan 5, 2024 15:37:25",
+"info":"Date Format should be: Jan 5, 2024 15:37:25"
+},
+{
+"type": "text",
+"id": "custom_text",
+"label": "Custom Text",
+"default": "Custom Text"
+},
+{
+"type": "text",
+"id": "expired_message",
+"label": "Expired Message",
+"default": "EXPIRED"
+},
+{
+"type": "select",
+"id": "text_alignment",
+"options": [
+{
+"value": "left",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__1.label"
+},
+{
+"value": "center",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__2.label"
+},
+{
+"value": "right",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.options__3.label"
+}
+],
+"default": "center",
+"label": "t:sections.announcement-bar.blocks.announcement.settings.text_alignment.label"
+},
+{
+"type": "select",
+"id": "color_scheme",
+"options": [
+{
+"value": "accent-1",
+"label": "t:sections.all.colors.accent_1.label"
+},
+{
+"value": "accent-2",
+"label": "t:sections.all.colors.accent_2.label"
+},
+{
+"value": "background-1",
+"label": "t:sections.all.colors.background_1.label"
+},
+{
+"value": "background-2",
+"label": "t:sections.all.colors.background_2.label"
+},
+{
+"value": "inverse",
+"label": "t:sections.all.colors.inverse.label"
+}
+],
+"default": "accent-1",
+"label": "t:sections.all.colors.label"
+}
+]
+}
+],
+"default": {
+"blocks": [
+{
+"type": "announcement"
+}
+]
+}
 }
 {% endschema %}

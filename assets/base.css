@@ -2993,3 +2993,8 @@ details-disclosure > details {
     outline: transparent solid 1px;
   }
 }
+ 
+.p-x-1{
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
