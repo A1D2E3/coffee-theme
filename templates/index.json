@@ -35,7 +35,7 @@
         "button"
       ],
       "settings": {
-        "bg_type": "image",
+        "bg_type": "video",
         "desktop_video": "shopify:\/\/files\/videos\/Desktop video.mp4",
         "mobile_video": "shopify:\/\/files\/videos\/Mobile video.mp4",
         "image": "shopify:\/\/shop_images\/banner_image_main.jpg",

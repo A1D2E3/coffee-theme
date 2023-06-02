@@ -16,7 +16,6 @@
         },
         "77a10acd-91a6-414d-8fbe-c2f48be10392": {
           "type": "date",
-          "disabled": true,
           "settings": {
             "date_deadline": "Jan 5, 2024 15:37:25",
             "custom_text": "Custom Text",
