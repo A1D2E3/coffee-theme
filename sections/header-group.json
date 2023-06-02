@@ -23,11 +23,22 @@
             "text_alignment": "center",
             "color_scheme": "background-1"
           }
+        },
+        "93e60918-bcde-4adc-ae10-c6d9d4e10fd3": {
+          "type": "date",
+          "settings": {
+            "date_deadline": "Jan 5, 2025 15:37:25",
+            "custom_text": "Custom Text",
+            "expired_message": "EXPIRED",
+            "text_alignment": "center",
+            "color_scheme": "accent-1"
+          }
         }
       },
       "block_order": [
         "announcement-bar-0",
-        "77a10acd-91a6-414d-8fbe-c2f48be10392"
+        "77a10acd-91a6-414d-8fbe-c2f48be10392",
+        "93e60918-bcde-4adc-ae10-c6d9d4e10fd3"
       ],
       "settings": {
       }
